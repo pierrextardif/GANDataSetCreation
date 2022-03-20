@@ -16,31 +16,43 @@ fi
 videosFolder="$1"
 
 if [ "$#" -eq 1 ]; then
-    echo "Usage: $0 <Videos Folder> <Images Folder>"
+    echo "Usage: $0 <Videos Folder> <Images Folder> <delete old folders 0 | 1 >"
     exit
 fi
 imagesFolder="$2"
 
+if [ "$#" -eq 2 ]; then
+    echo "Usage: $0 <Videos Folder> <Images Folder> <delete old folders 0 | 1 >"
+    exit
+fi
+delete="$3"
 
 
-count=$( ls "$imagesFolder" | wc -l )
-echo "adding $count images"
+
+countImages=$( ls "$imagesFolder" | wc -l )
+countVideos=$( ls "$videosFolder" | wc -l )
+echo "adding $countImages images to $countVideos"
 
 i=0
 
 for f in $imagesFolder/*; do
 	name=img__`printf %09d $i`."$EXT"
-	mv $f $now/$name
+	cp $f $now/$name
 	i=$((i+1))
 done
 
 
 for f in $videosFolder/*; do
 	name=img__`printf %09d $i`."$EXT"
-	mv $f $now/$name
+	cp $f $now/$name
 	i=$((i+1))
 done
 
 
-rm -r $videosFolder
-rm -r $imagesFolder
+if $delete ; then
+    echo 'deleting the old folders!'
+
+	rm -r $videosFolder
+	rm -r $imagesFolder
+
+fi

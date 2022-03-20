@@ -36,7 +36,7 @@ for f in $videosFolder/*.mov; do
 	i=$((i+1))
 done
 
-count=$( ls "$now" | wc -l )
+count=$( ls "$TMP" | wc -l )
 echo "we have $count images extracted"
 echo "renaming the frames"
 
