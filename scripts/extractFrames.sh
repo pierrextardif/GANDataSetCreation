@@ -18,7 +18,7 @@ if [ "$#" -eq 0 ]; then
     echo "Usage: $0 <Videos Folder> < fps >"
     exit
 fi
-VideosFolder="$1"
+videosFolder="$1"
 
 if [ "$#" -eq 1 ]; then
     echo "Usage: $0 <Videos Folder> < fps >"
@@ -29,7 +29,7 @@ fps="$2"
 
 echo "extracting the frames from all videos now"
 i=0
-for f in $VideosFolder/*.mov; do
+for f in $videosFolder/*.mov; do
 	echo "original name Folder = "$f 
 	ffmpeg -i $f -vf fps=$fps -f image2 -qscale:v 2 $TMP/image_"$i"_%5d."$EXT"
 	echo $i
